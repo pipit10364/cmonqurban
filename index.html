@@ -67,7 +67,18 @@
   }
   .game-title span { color: var(--yellow); }
   .game-sub { font-size:14px; color:rgba(255,255,255,0.5); margin-bottom:4px; }
-  .animals-row { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:6px 0; }
+  .animals-row {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:10px;
+    justify-content:center;
+    margin:6px 0;
+    width:100%;
+    max-width:380px;
+  }
+  @media (max-width: 420px) {
+    .animals-row { grid-template-columns: repeat(2, 1fr); }
+  }
   .ac {
     background: var(--card);
     border:1px solid rgba(255,255,255,0.08);
@@ -165,7 +176,7 @@
     transform:translateX(-50%);
     background:linear-gradient(135deg,var(--purple),var(--pink));
     border-radius:20px; padding:5px 18px;
-    font-family:'Righteous',cursive; font-size:16px;
+    font-family:'Righteous',cursive; font-size:clamp(12px,3.5vw,16px);
     color:white; z-index:22; white-space:nowrap;
     display:none;
     box-shadow:0 4px 16px rgba(177,86,143,.5);
@@ -180,7 +191,7 @@
     background:rgba(248,198,48,.15);
     border:2px solid var(--yellow);
     border-radius:20px; padding:14px 32px;
-    font-family:'Righteous',cursive; font-size:22px;
+    font-family:'Righteous',cursive; font-size:clamp(14px,3.8vw,22px);
     color:var(--yellow); z-index:48; white-space:nowrap;
     animation:warn-pulse 1s ease-out forwards;
     pointer-events:none;
@@ -274,7 +285,7 @@
     position:fixed; top:76px; left:50%; transform:translateX(-50%);
     background:linear-gradient(135deg,var(--purple),var(--pink));
     border-radius:30px; padding:7px 22px;
-    font-family:'Righteous',cursive; font-size:20px;
+    font-family:'Righteous',cursive; font-size:clamp(14px,4vw,20px);
     color:white; white-space:nowrap; z-index:25;
     animation:combo-pop .3s ease-out;
     box-shadow:0 4px 20px rgba(177,86,143,.5);
@@ -290,7 +301,7 @@
     position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
     background:rgba(177,86,143,.92);
     border-radius:20px; padding:12px 32px;
-    font-family:'Righteous',cursive; font-size:26px;
+    font-family:'Righteous',cursive; font-size:clamp(16px,4.5vw,26px);
     color:white; z-index:50;
     animation:spd-flash 1.2s ease-out forwards;
   }
