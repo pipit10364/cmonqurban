@@ -449,8 +449,8 @@
 
   <div class="input-wrap">
     <label>Username Instagram</label>
-    <input type="text" id="playerName" placeholder="@usernameIGkamu" maxlength="30" autocomplete="off" autocorrect="off" autocapitalize="none">
-    <div class="input-hint">Tanpa @ juga boleh</div>
+    <input type="text" id="playerName" placeholder="@usernameIGkamu" maxlength="30" autocomplete="off" autocorrect="off" autocapitalize="none" oninput="sanitizeIGInput(this)">
+    <div class="input-hint">Huruf kecil, angka, titik ( . ), atau underscore ( _ )</div>
   </div>
   <button class="btn-play" onclick="startCountdown()">Main Sekarang 🎮</button>
 </div>
@@ -560,6 +560,15 @@ function moveBasket(){
 }
 moveBasket();
 
+// ===== INPUT SANITIZE =====
+window.sanitizeIGInput = function(el){
+  let v = el.value;
+  if(v.startsWith('@')) v = v.slice(1);
+  v = v.toLowerCase();
+  v = v.replace(/[^a-z0-9._]/g, '');
+  el.value = v;
+};
+
 // ===== START =====
 window.startCountdown = function(){
   let raw=document.getElementById('playerName').value.trim();
@@ -569,7 +578,7 @@ window.startCountdown = function(){
     setTimeout(()=>document.getElementById('playerName').style.borderColor='',1000);
     return;
   }
-  playerName=raw.startsWith('@')?raw.slice(1):raw;
+  playerName=raw.toLowerCase().replace(/[^a-z0-9._]/g,'');
   showScreen('screen-game');
   let count=3; showCD(count);
   const ci=setInterval(()=>{
